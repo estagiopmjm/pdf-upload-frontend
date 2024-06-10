@@ -5,7 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PDF Upload</title>
     <style>
-        /* Seu CSS existente */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        .file-upload {
+            display: inline-block;
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: 
+#007bff;
+            color: 
+white;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .file-upload input {
+            display: none;
+        }
+        #submitBtn {
+            display: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: 
+#28a745;
+            color: 
+white;
+            border: none;
+            border-radius: 5px;
+        }
+        #uploadingMsg {
+            display: none;
+            margin-top: 10px;
+            color: 
+#ffc107;
+        }
+        #message {
+            margin-top: 10px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -45,17 +87,20 @@
             uploadingMsg.style.display = 'block';
             try {
                 const response = await fetch('https://serve-gg-5026a03248d1.herokuapp.com/upload', {
-                    method: 'POST', // Método POST para upload
+                    method: 'POST', 
                     body: formData
                 });
                 const result = await response.json();
                 if (response.ok) {
                     message.textContent = 'File uploaded successfully!';
+                    message.style.color = '#28a745';
                 } else {
                     message.textContent = 'Error: ' + result.error;
+                    message.style.color = '#dc3545';
                 }
             } catch (error) {
                 message.textContent = 'An error occurred: ' + error.message;
+                message.style.color = '#dc3545';
             } finally {
                 uploadingMsg.style.display = 'none';
                 submitBtn.style.display = 'inline-block';
@@ -64,3 +109,4 @@
     </script>
 </body>
 </html>
+
